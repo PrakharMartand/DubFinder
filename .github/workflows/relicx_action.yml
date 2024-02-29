@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
+      - run: $ easy_install six
       - name: relicx-ai-test
         uses: relicx-ai/relicx-githubaction@v1.4
         with:
@@ -21,3 +22,5 @@ jobs:
           test_suite_id: '28ddd0f1-6216-4520-a094-54786b1f2c91'
           environment_id: '1fcd613a-0238-4a3d-98a9-262c925cfac2'
           wait: false
+
+

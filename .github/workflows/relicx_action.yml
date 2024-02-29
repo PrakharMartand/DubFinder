@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Install six
-        run: pip install six
+        run: pip install --ignore-installed six
         
       - name: relicx-ai-test
         uses: relicx-ai/relicx-githubaction@v1.4

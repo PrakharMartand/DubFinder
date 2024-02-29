@@ -7,17 +7,11 @@ with:
   test_suite_id: '28ddd0f1-6216-4520-a094-54786b1f2c91'
   environment_id: '1fcd613a-0238-4a3d-98a9-262c925cfac2'
   wait: false
-name: check-dist
-#
-# cypress-io/github-action runs from the dist/ directory
-# This workflow ensures that the contents of this directory
-# are in sync with the source files by using
-# npm run build which in turn calls ncc build
-#
+name: relicx-ai
 on:
   push:
     branches:
-      - 'master'
+      - 'main'
   pull_request:
   workflow_dispatch:
 
@@ -26,20 +20,13 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - name: relicx-ai-test
+        uses: relicx-ai/relicx-githubaction@v1.4
         with:
-          node-version: 20.8.1
-      - run: npm ci
-      - run: npm run format
-      - run: npm run build
-
-      - name: Compare the expected and actual dist/ directories
-        run: |
-          if [ "$(git diff --ignore-space-at-eol dist/ | wc -l)" -gt "0" ]; then
-            echo "Detected uncommitted changes after build.  See status below:"
-            git diff
-            exit 1
-          fi
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          app_id: '1c4b44c5-3576-47d1-90bd-f07a1f293143'
+          command: 'run_test_suite'
+          test_suite_id: '28ddd0f1-6216-4520-a094-54786b1f2c91'
+          environment_id: '1fcd613a-0238-4a3d-98a9-262c925cfac2'
+          wait: false

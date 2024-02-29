@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - run: $ easy_install six
+      - run: easy_install six
       - name: relicx-ai-test
         uses: relicx-ai/relicx-githubaction@v1.4
         with:

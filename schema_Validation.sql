@@ -63,5 +63,5 @@ INSERT INTO posts (user_id, category_id, title, content) VALUES
 
 -- Insert demo data into comments table
 INSERT INTO comments (post_id, user_id, content) VALUES
-(1, 2, 'Great post done!'),
+(1, 2, 'Great post!'),
 (2, 1, 'Thanks for sharing.');

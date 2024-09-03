@@ -1,0 +1,22 @@
+inputSet:
+  pipeline:
+    identifier: PIPE20804remote
+    stages:
+      - stage:
+          identifier: stage
+          type: Custom
+          spec:
+            execution:
+              steps:
+                - step:
+                    identifier: ShellScript_1
+                    type: ShellScript
+                    spec:
+                      source:
+                        type: Inline
+                        spec:
+                          script: echo "This is new"
+  name: input1Set
+  identifier: input1Set
+  orgIdentifier: Ng_Pipelines_K8s_Organisations
+  projectIdentifier: Do_Not_Delete_Prakhar

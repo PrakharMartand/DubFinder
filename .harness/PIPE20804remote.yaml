@@ -28,4 +28,29 @@ pipeline:
                     outputVariables: []
                   timeout: 10m
         tags: {}
+    - stage:
+        name: stage 2
+        identifier: stage_2
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: ShellScript
+                  name: ShellScript_1
+                  identifier: ShellScript_1
+                  spec:
+                    shell: Bash
+                    executionTarget: {}
+                    source:
+                      type: Inline
+                      spec:
+                        script: |-
+                          echo 2132
+                          echo <+pipeline.branch>
+                    environmentVariables: []
+                    outputVariables: []
+                  timeout: <+input>
+        tags: {}
   fixedInputsOnRerun: false

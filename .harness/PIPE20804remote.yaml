@@ -47,7 +47,7 @@ pipeline:
                       type: Inline
                       spec:
                         script: |-
-                          echo 2132
+                          echo BHi
                           echo <+pipeline.branch>
                     environmentVariables: []
                     outputVariables: []

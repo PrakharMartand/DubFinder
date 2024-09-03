@@ -23,8 +23,9 @@ pipeline:
                     source:
                       type: Inline
                       spec:
-                        script: echo Hi
+                        script: <+input>
                     environmentVariables: []
                     outputVariables: []
                   timeout: 10m
         tags: {}
+  fixedInputsOnRerun: true

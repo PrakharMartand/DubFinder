@@ -28,4 +28,4 @@ pipeline:
                     outputVariables: []
                   timeout: 10m
         tags: {}
-  fixedInputsOnRerun: true
+  fixedInputsOnRerun: false

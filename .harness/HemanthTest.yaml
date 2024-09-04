@@ -1,0 +1,73 @@
+pipeline:
+  name: HemanthTest
+  identifier: HemanthTest
+  projectIdentifier: demoPrakhar
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: cd1
+        identifier: cd1
+        description: ""
+        type: Deployment
+        spec:
+          deploymentType: Kubernetes
+          service:
+            serviceRef: prakhService
+            serviceInputs:
+              serviceDefinition:
+                type: Kubernetes
+                spec:
+                  variables:
+                    - name: team
+                      type: String
+                      default: cd
+                      value: <+input>.default(cd).allowedValues(cd)
+                    - name: delegate
+                      type: String
+                      default: gke
+                      value: <+input>.default(gke).allowedValues(gke,aks,eks)
+                  artifacts:
+                    primary:
+                      primaryArtifactRef: <+input>
+                      sources: <+input>
+          environment:
+            environmentRef: cdSmp
+            deployToAll: false
+            infrastructureDefinitions:
+              - identifier: infra1
+          execution:
+            steps:
+              - stepGroup:
+                  name: csg1
+                  identifier: csg1
+                  steps:
+                    - step:
+                        type: Run
+                        name: Run_1
+                        identifier: Run_1
+                        spec:
+                          connectorRef: account.harnessImage
+                          image: cypress/base:20.14.0
+                          shell: Sh
+                          command: cypress -v
+                  stepGroupInfra:
+                    type: KubernetesDirect
+                    spec:
+                      connectorRef: account.cdplayacc
+                      namespace: default
+            rollbackSteps:
+              - step:
+                  name: Rollback Rollout Deployment
+                  identifier: rollbackRolloutDeployment
+                  type: K8sRollingRollback
+                  timeout: 10m
+                  spec:
+                    pruningEnabled: false
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback

@@ -27,3 +27,5 @@ if [ -n "$duplicated_lines" ]; then
 else
   echo "No duplicated lines ending with '?' found in $input_file."
 fi
+
+# This is a PR commit on new branch
